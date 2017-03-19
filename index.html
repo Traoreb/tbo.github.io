@@ -1,7 +1,470 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+<!--
+ _________ ____   ___     _       __        _        _______   _            __         ________
+ \  ____ / \  /  |   \   | |     /  \      | |      |  ____/  | |          /  \       |  ____  |
+ | |____    ||   | |\ \  | |    / /\ \     | |      | |       | |         / /\ \      | |____| |
+ |  ___/    ||   | | \ \ | |   / /__\ \    | |      | |       | |        / /__\ \     |  ______|
+ | |        ||   | |  \ \| |  / _____\ \   | |      | |       | |       / _____\ \    | |
+ | |        ||   | |   \   | / /      \ \  | |_____ | |____   | |_____ / /      \ \   | |
+/_/        /__\ /_/    /__/ /_/        \_\ |______/ |______\  |______//_/        \_\ /__|
+
+-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="Content-Language" content="fr"/>
+<meta name="robots" content="index, follow"/>
+<meta name="identifier-url" content="http://www.finalclap.com"/>
+<meta name="Expires" content="never"/>
+<meta name="Description" content="Xenu est un petit programme très pratique pour effectuer diverses opérations sur un site internet, comme générer un sitemap (en parcourant le site de lien en lien comme un robot d'indexation), ou"/>
+
+<title>Tester une liste d'URL (code HTTP) pour trouver les liens morts avec Xenu</title>
+
+<link rel="alternate" type="application/rss+xml" title="News de Finalclap" href="http://feeds.feedburner.com/Finalclap" />
+<link rel="stylesheet" type="text/css" href="/style/style.min.css?1379440811"/>
+<style type="text/css">
+/* 06/08/2012 17:00:52 Modified: 06/08/2012 00:52:46 */
+#content .tuto a, #content .news a, #content .faq a{text-decoration:underline; color:#1f89bf; font-weight:900; font-size:14px;}
+#content .tuto a:hover, #content .news a:hover, #content .faq a:hover{color:rgb(82, 196, 255);}
+
+/* 13/07/2013 22:25:38 : excel */
+body {padding-bottom:100px;}
+#excel_forum_promo {position:fixed; bottom:0; left:0; width:100%; height:80px; background-color:#176f41;}
+#excel_forum_promo>div {position:relative; width:960px; height:100%; margin:0 auto;}
+#excel_forum_promo>div>img {position:absolute; top:5px; left:0;}
+#excel_forum_promo .pitch  {position:absolute; top:10px; left:250px; width:600px; font:14pt Arial; color:white;}
+#excel_forum_promo .pitch b{font-size:140%;}
+#excel_forum_promo .arrow  {position:absolute; top:6px; right:35px; font:44pt Arial; color:white;}
+#excel_forum_promo>div>a {display:block; position:absolute; top:0; left:0; width:100%; height:100%; text-indent:-999px;}
+</style>
+
+
+<script type="text/javascript">
+// Suivi Adsense Analytics
+window.google_analytics_uacct = "UA-3037851-1";
+
+// Déclaration globales
+serveurHost = 'www.finalclap.com';
+fcs = true;
+adsInjectors = [{"used":true,"report":{"method":"relative","position":50,"truePosition":4},"id":0}];
+</script>
+
+<script type="text/javascript" src="http://apis.google.com/js/plusone.js">{lang: 'fr',parsetags: 'explicit'}</script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript" src="/script/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="/script/zoombox/zoombox.js"></script>
+<script type="text/javascript" src="/script/syntaxhl/scripts/shCore.js"></script>
+<script type="text/javascript" src="/script/syntaxhl/scripts/shAutoloader.js"></script>
+<script type="text/javascript" src="/script/bigone.js?1364824141"></script>
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3037851-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+<!-- header -->
+<div class="header_wrap">
+<div id="header">
+	<a id="logo" href="/">Finalclap</a>
+	
+	<div class="descr">
+		Tutoriaux gratuits pour :<br/>
+		<a href="/tutoriaux/photoshop/">Photoshop</a>
+		<a href="/tutoriaux/php/">PHP</a><br/>
+		<a href="/tutoriaux/after-effects/">After Effects</a>
+		<a href="/tutoriaux/jquery/">jQuery</a><br/>
+		<a href="/tutoriaux/3dsmax/">3D Studio Max</a>
+		<a href="/tutoriaux/wordpress/">WordPress</a>
+	</div>
+	
+	<div class="nav">
+		<a class="lien_b" href="/faq/" title="">FAQ</a>
+		<a class="lien_j" href="/download/" title="Ressources gratuites à télécharger">Stockmotion</a>
+		<a class="lien_b" href="#tutoriaux" id="tutoriaux_handle" title="Des tutoriaux pour apprendre pleins de choses : Photoshop, After Effects...">Tutoriaux</a>
+		<a class="lien_v" href="/" title="Sources d'inspiration, détente...">Blog</a>
+		<a class="lien_r" href="http://forum.finalclap.com" title="Posez vos questions à la communauté">Forum</a>
+	</div>
+	
+	<div class="minilinks">
+				<a href="http://forum.finalclap.com/ucp.php?mode=register">Inscription</a> -
+		<a href="#connexion" id="login_handle">Connexion</a>
+		</div>
+</div><!-- header -->
+<div class="header_sep"></div>
+</div><!-- header_wrap -->
+
+
+<div id="tutoriaux_spacemountain">
+<div id="tutoriaux_wrap">
+<div id="tutoriaux">
+	<a href="/tutoriaux/3dsmax/" title="Tutoriels 3D Studio Max"><i class="icon-3dsmax"></i>3D Studio Max</a>
+	<a href="/tutoriaux/after-effects/" title="Tutos After Effects"><i class="icon-ae"></i>After Effects</a>
+	<a href="/tutoriaux/photoshop/" title="Tuto Photoshop"><i class="icon-ps"></i>Photoshop</a>
+	<a href="/tutoriaux/montage/" title="Cours de montage audiovisuel"><i class="icon-cut"></i>Montage</a>
+	<a href="/tutoriaux/jquery/" title="Tutos jQuery"><i class="icon-jq"></i>jQuery</a>
+	<a href="/tutoriaux/wordpress/" title="Tutoriels Wordpress"><i class="icon-wp"></i>WordPress</a>
+</div><!-- tutoriaux -->
+</div><!-- tutoriaux_wrap -->
+</div><!-- tutoriaux_spacemountain -->
+
+
+<div id="login_wrap">
+<div id="login">
+<form action="/etc/login.php" method="post" style="margin:10px 14px 10px;" class="fc-form">
+	<input type="submit" value="Connexion" class="bigbtn" style="margin-top:97px; float:right; display:block; padding:0; width:150px; height:50px; line-height:50px;" />
+	<div class="field">
+		<label class="label">Pseudo</label>
+		<div class="field_value">
+			<input type="text" class="inputbox" name="pseudo" />
+		</div>
+	</div>
+	<div class="field">
+		<label class="label">Mot de passe</label>
+		<div class="field_value" style="margin-bottom:10px;">
+			<input type="password" class="inputbox" name="password" />
+		</div>
+	</div>
+	&nbsp; <input type="checkbox" style="margin: 0pt; padding: 0pt;" name="auto" id="login_auto" /> <label for="login_auto">Connexion automatique</label>
+</form>
+</div>
+</div>
+<!-- END header -->
+
+<div id="main_wrap">
+	<div id="page">
+<div id="content">
+<div id="faq-single-head">
+	<i class="item-icon icon-64 icon-windows"></i>
+	<h1 style="margin:0 0 2px;">Tester une liste d'URL (code HTTP) pour trouver les liens morts avec Xenu</h1>
+	<div class="date">Décembre 2012</div>
+	<div style="clear:both;"></div>
+</div>
+<div class="post faq">
+	<p>Xenu est un petit programme très pratique pour effectuer diverses opérations sur un site internet, comme générer un sitemap (en parcourant le site de lien en lien comme un robot d'indexation), ou par exemple pour tester une liste de pages web.</p>
+<p>Commencer par télécharger Xenu sur le site officiel : <a rel="nofollow" href="http://home.snafu.de/tilman/xenulink.html">Xenu Link Sleuth</a>.</p>
+<p>Ici, l'idée est d'utiliser Xenu afin de tester une liste d'URL, et plus précisément de tester les codes HTTP contenus dans les headers : 200 OK, 404 Not found, redirection 301, redirection 302, 403 accès refusé, erreur 500...</p>
+<p>Cet outil est très pratique pour tester des règles de réécriture d'URL Apache (URL rewriting avec mod_rewrite).</p>
+<p>Voici la marche à suivre :</p><div class="adswrap" id="_ads_bigsquare_content_tuto__0">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7458225086000196";
+/* grand rectangle tutos - 16/07/09 */
+google_ad_slot = "4833733092";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>
+<ol>
+<li>Placer la liste des URLs à tester dans un fichiertexte, avec une ligne par URL</li>
+<li>Lancez Xenu, puis allez dans <em>Options &gt; Preferences</em>
+<ul>
+<li>Dans le champ <em>Maximum depth</em>, indiquez <strong>0</strong><br />
+C'est pour éviter que Xenu cherche des URLs dans les pages qu'il télécharge afin de les analyser elles mêmes (on appelle ça le scrapping).<br />
+Ici ce qui nous intéresse c'est de tester uniquement les URLs qui sont dans la liste, et rien de plus.</li>
+<li>Cochez la case <em>Treat redirections as errors</em><br />
+Sinon les URLs qui renvoient une redirection (301 et 302) seront remplacées par l'URL redirigée (header location)</li>
+</ul><p>Dans un tout autre contexte, cet article est très intéressant : <a href="http://excel.engalere.com/question/3-limite-de-taille-max-des-cellules-texte-excel">limite de taille max des cellules texte excel</a>.</p>
+</li>
+<li>Ouvrez le fichier contenant la liste des URLs en allant dans <em>Check URL List (Test)...</em></li>
+</ol>
+<p>C'est parti ! Xenu va analyser toutes les URLs, et à la fin du processus vous obtenez le résultat sous forme de tableau :</p>
+<p><img class="wide" src="/ressources/images/faq/xenu-url-list-check.png" alt="Test liste URL" width="640" height="408" /></p>	<p>Allez donc jeter un oeil sur cette page : <a href="http://www.photoshoptuto.com/tuto/texte-dentelle-969">texte en dentelle</a>.</p>	<div class="adswrap" id="_ads_ens_thematique_v3">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-7458225086000196";
+/* Ens. thématique v3 - 04/03/09 */
+google_ad_slot = "9405522127";
+google_ad_width = 468;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>	<div class="facebook_jaime full-width"><div class="bg"></div><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.finalclap.com%2Ffaq%2F99-xenu-tester-liste-url-http&amp;layout=standard&amp;show_faces=false&amp;width=250&amp;action=like&amp;colorscheme=light&amp;height=50" scrolling="no" frameborder="0" allowTransparency="true"></iframe></div>
+
+	<div class="ariane round-bottom">
+		<div class="bg"></div>
+		<div class="title">Fil de lecture</div>
+		<ul>
+		<li><a href="/faq/326-after-effects-freeform">Digieffects FreeForm dans After Effects</a></li><li><a href="/faq/218-pyscripter-ide-python-debugger">PyScripter : un excellent IDE Python, gratuit et puissant</a></li><li><a href="/faq/443-photoshop-photofiltre">Photofiltre ou Photoshop ?</a></li><li><a href="/faq/254-google2piwik-import-analytics-piwik">Sauvegarder les données de Google Analytics dans Piwik</a></li><li><a href="/faq/240-changer-couleur-icone-firefox">Changer la couleur de l'icône Firefox</a></li>		</ul>
+	</div>
+</div>
+
+		<div style="margin:40px 0 0 7px;">
+			<div style="font:bold 14pt Arial;">1 commentaire :</div>
+					</div>
+		<div class="commentaires"><div class="com" id="com-2987">
+<div class="body">
+	<div class="gravatar">
+		<a href="/commentaire-2987.html"><img src="http://www.gravatar.com/avatar.php?gravatar_id=3ef0ee9c16ee078d421844f8f27f96ae&amp;size=70&amp;d=mm" width="70" alt="commentaire n°2987 par 404enemy" /></a>
+	</div>
+	
+	<div class="right">
+		<div class="meta">
+			<span class="author"><a rel="nofollow" href="https://404enemy.com">404enemy</a></span>
+			<span class="date">mercredi 28 janvier 2015, 19:57</span>
+						<input type="button" class="repondre" value="répondre" />
+					</div>
+		<div class="content">Super article, j'ai beaucoup utilisé Xenu (sur les sites que j'hébergeais pour mes clients) mais depuis que je suis passé sous Linux, je me suis retrouvé sans rien de comparable.<br />
+J'ai voulu voir ce qui ce faisait en ligne (WebTool) et rien de super, trop limité, trop cher...<br />
+<br />
+J'ai finalement développé le miens, <a rel="nofollow" target="_blank" href="https://404enemy.com/">https://404enemy.com/</a><br />
+C'est en béta pour le moment, mais c'est largement utilisable pour des sites de moins de 10k liens.<br />
+Évidement, c'est gratuit et à consommer sans modération :)</div>
+	</div>
+
+		<div style="clear:left;"></div>
+</div>
+<div class="replies"></div>
+</div>
+</div><div class="comment-form">
+<form method="post" action="/etc/commentPost.php">
+	<input type="hidden" name="comment[type_obj]" value="faq" />
+	<input type="hidden" name="comment[id_obj]" value="99" />
+	<input type="hidden" name="comment[parent]" value="0" />
+	
+	<div style="width:107%;">
+	<div class="field">
+		<label>Pseudo</label>
+		<div>
+							<input type="text" name="comment[pseudo]" value="" />
+					</div>
+	</div>
+	
+		<div class="field">
+		<label>Email</label>
+		<div>
+			<input type="text" name="comment[mail]" value="" />
+		</div>
+	</div>
+	<div class="field" style="width:auto;">
+		<label>Site web</label>
+		<div>
+			<input type="text" name="comment[website]" size="30" value="" />
+			<span class="help">facultatif</span>
+		</div>
+	</div>
+		<div style="clear:left;"></div>
+	</div>
+	
+	<div class="field field-comment">
+		<label>Commentaire</label>
+		<div style="padding-right:7px;">
+			<textarea name="comment[commentaire]"></textarea>
+		</div>
+	</div>
+	
+	<div>
+		<input type="submit" class="repondre" value="Envoyer" />
+	</div>
+</form>
+</div>
+
+</div><!-- #content -->
+<script type="text/javascript">
+jQuery(document).ready(function($){
+	$('#sidebar_more_tutorials').click(function(e){
+		e.preventDefault();
+		$('#menu_tutoriaux_hidden').slideToggle();
+	});
+});
+</script>
+
+<div id="sidebar">
+
+<div id="menu_tutoriaux">
+	<div class="top"></div>
+	<div class="mid">
+		<a href="/tutoriaux/3dsmax/">3D Studio Max</a>
+		<a href="/tutoriaux/after-effects/">After Effects</a>
+		<a href="/tutoriaux/photoshop/">Photoshop</a>
+		<a href="/tutoriaux/montage/">Montage</a>
+		<a href="/tutoriaux/jquery/">jQuery</a>
+		<a href="/tutoriaux/wordpress/">WordPress</a>
+		<a href="/tutoriaux/php/">PHP</a>
+				<div id="menu_tutoriaux_hidden" style="display:none;">
+		<a href="/tutoriaux/divers/">Divers</a>
+		</div>
+	</div>
+	<a style="position:absolute; right:43px; bottom:-25px; color:white; font:8pt Arial; color:#555;" href="#more-tutorials" id="sidebar_more_tutorials">+ de tutos</a>
+	<div class="bottom"></div>
+</div>
+
+
+<script type="text/javascript">
+jQuery(document).ready(function($){
+	$('#aff_tuto_com').mouseup(function(e){
+		$.post('/etc/ajax/stats-affiliation.php', {
+			'urlFrom' : document.location.href,
+			'annonce' : 'sidebar ; weecast_250x250.jpg'
+		});
+	});
+});
+</script>
+<a href="http://fr.tuto.com/?aff=vd4fa4f" title="Tuto" id="aff_tuto_com" class="radius-8 box-shadow-8" rel="nofollow" style="display:block; width:250px; height:250px; margin:40px 0 20px 25px; background:url('http://fr.tuto.com/banner/common/weecast_250x250.jpg') left top no-repeat;"></a>
+
+<div align="center" style="margin-bottom: 10px;"><img src="/style/images/tuto_sb_bg.png" alt="tutos" /></div>
+<div class="sb_last_tutos post">
+<div class="item">
+<table>
+<tr><td>
+<img class="petit cadre" src="/ressources/thumbnails/tuto-gif-anime.png" width="100" alt="Créer un gif animé avec Photoshop" />
+</td><td>
+<h2><a href="/tuto/photoshop-creer-gif-anime-88/" rel="bookmark" >Créer un gif animé avec Photoshop</a></h2>
+</td></tr>
+</table>
+<div style="clear: both; height: 10px;"></div>
+<p>Tuto : comment créer une image GIF animé avec Photoshop et le panneau montage pour contrôler l'animation des images-clés.</p>
+</div>
+<div class="item">
+<table>
+<tr><td>
+<img class="petit cadre" src="/ressources/thumbnails/tuto-iframeTracker.png" width="100" alt="Tracking de clic dans une iframe" />
+</td><td>
+<h2><a href="/tuto/track-iframe-click-jquery-87/" rel="bookmark" >Tracking de clic dans une iframe</a></h2>
+</td></tr>
+</table>
+<div style="clear: both; height: 10px;"></div>
+<p>Créer un plugin jQuery qui permet de détecter les clics dans une iframe, en utilisant l’événement blur.</p>
+</div>
+<div class="item">
+<table>
+<tr><td>
+<img class="petit cadre" src="/ressources/thumbnails/tuto_85.png" width="100" alt="Crypter un mot de passe avec PHP" />
+</td><td>
+<h2><a href="/tuto/php-cryptage-aes-chiffrement-85/" rel="bookmark" >Crypter un mot de passe avec PHP</a></h2>
+</td></tr>
+</table>
+<div style="clear: both; height: 10px;"></div>
+<p>Protéger des données en utilisant le chiffrement AES avec mcrypt en PHP</p>
+</div>
+<div class="item">
+<table>
+<tr><td>
+<img class="petit cadre" src="/ressources/thumbnails/tuto-train-atterrissage.jpg" width="100" alt="Train d'atterrissage" />
+</td><td>
+<h2><a href="/tuto/3dsmax-atterrissage-29/" rel="bookmark" >Train d'atterrissage</a></h2>
+</td></tr>
+</table>
+<div style="clear: both; height: 10px;"></div>
+<p>Animer très facilement des systèmes complexes grâce à la mise en relation des paramètres dans 3D Studio Max.</p>
+</div>
+<div class="item">
+<table>
+<tr><td>
+<img class="petit cadre" src="/ressources/thumbnails/tuto_52.png" width="100" alt="Électrocardiogramme" />
+</td><td>
+<h2><a href="/tuto/electrocardiogramme-ekg-dr-house-52/" rel="bookmark" >Électrocardiogramme</a></h2>
+</td></tr>
+</table>
+<div style="clear: both; height: 10px;"></div>
+<p>Réaliser un électrocardiogramme comme dans Dr House !</p>
+</div>
+<div class="item">
+<table>
+<tr><td>
+<img class="petit cadre" src="/ressources/thumbnails/tuto_35.png" width="100" alt="Incruster un objet 3D dans une vidéo" />
+</td><td>
+<h2><a href="/tuto/3dsmax-tracking-35/" rel="bookmark" >Incruster un objet 3D dans une vidéo</a></h2>
+</td></tr>
+</table>
+<div style="clear: both; height: 10px;"></div>
+<p>Un vaisseau spatial se pose. Trucage d'une vidéo.</p>
+</div>
+</div>
+</div><!-- #sidebar --></div><!-- #page -->	<div style="clear:both;"></div>
+	
+	<div id="rocketfloat_wrap">
+		<div id="rocketfloat_dock"></div>
+		<div id="rocketscience"></div>
+		<div id="rocketfloat_mobile">
+			<div class="fire top"></div>
+			<div class="fire bottom"></div>
+			<div class="rocket_body"><iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.finalclap.com%2Ffaq%2F99-xenu-tester-liste-url-http&amp;send=false&amp;layout=button_count&amp;width=50&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:110px; height:21px;" allowTransparency="true"></iframe></div>
+		</div>
+	</div>
+</div><!-- #main_wrap -->
+
+<div id="footer">
+	<a href="/annuaire/">Annuaire</a> -
+	<a href="/livreor/">Livre d'or</a> -
+	<a href="/contact.html">Contact</a> -
+	<a href="/liens.html">Liens</a> -
+	<a href="/nous-aider.html">Nous aider</a> -
+	<a href="http://feeds.feedburner.com/Finalclap">Flux RSS</a> -
+	<a href="/faq.html">FAQ</a>
+	<div class="footer_left"></div>
+	<div class="footer_right"></div>
+</div>
+
+<div id="under_footer">
+&copy; 2007-2017 - Tous droits réservés<br/>
+Page générée en 15 ms - 21 connectés</div><!-- #footer -->
+
+<table class="bottom_links">
+<tr>
+	<td><div align="center"><img src="/style/images/faq_bg.png" alt="FAQ" /></div><a rel="bookmark" href="/faq/477-php-favicon-find-download">Trouver et télécharger le favicon d'une page en PHP</a><a rel="bookmark" href="/faq/476-vnc-teamviewer-alternative">Utiliser VNC à la place de TeamViewer</a><a rel="bookmark" href="/faq/475-javascript-point-virgule-instruction">Le point virgule est-il obligatoire en Javascript ?</a><a rel="bookmark" href="/faq/474-cinema-4d-lite">Cinema 4D Lite pour After Effects</a><a rel="bookmark" href="/faq/473-jquery-tracking-clic-lien-hypertexte">Enregistrer les clics sur des liens externes avec jQuery</a><a rel="bookmark" href="/faq/472-https-localhost-apache">Utiliser HTTPS en local sur Apache</a><a rel="bookmark" href="/faq/471-javascript-obfusquer-code-source">Obfuscation javascript pour protéger son code source</a><a rel="bookmark" href="/faq/470-after-effects-cineware">Cineware avec After Effects et Cinema 4D</a></td>
+	<td><div align="center"><img src="/style/images/billets_bg.png" alt="Billets" /></div><a rel="bookmark" href="/news/104-concours-oracom-advanced-creation.html">2 magazines à gagner !</a><a rel="bookmark" href="/news/103-musique-gratuite-open-source-studiolebus.html">Musique libre et gratuite - StudioLeBus</a><a rel="bookmark" href="/news/102-concours-video2brain-2013.html">Concours video2brain</a><a rel="bookmark" href="/news/101-update-cours-photoshop-2013.html">Nouveau cours Photoshop</a><a rel="bookmark" href="/news/100-lancement-faq-5-ans.html">Découvrez les FAQ !</a><a rel="bookmark" href="/news/99-wix-app-market.html">Wix App Market</a><a rel="bookmark" href="/news/98-redbull-stratos-mission.html">Redbull Stratos Mission</a><a rel="bookmark" href="/news/97-lytro-appareil-photo-plenoptique.html">Lytro : l'appareil photo plénoptique grand public</a><a rel="bookmark" href="/news/96-odyssee-cartier-pub-quad.html">L'Odyssée de Cartier</a><a rel="bookmark" href="/news/95-musique-libre-droit-auteur-court-metrage.html">Musiques libres de droits pour vos court-métrages</a></td>
+	<td><div align="center"><img src="/style/images/forum_bg.png" alt="Forum" /></div><a href="http://forum.finalclap.com/topic3039.html">Les petits tracas de Cosser sur After Effects</a><a href="http://forum.finalclap.com/topic354.html">Aucun croisement ?</a><a href="http://forum.finalclap.com/topic2277.html">Galaxie [vortex] Possible ??</a><a href="http://forum.finalclap.com/topic3067.html">Showreel 2014 !</a><a href="http://forum.finalclap.com/topic3217.html">Comment reproduire les mouvements caméra ?</a><a href="http://forum.finalclap.com/topic2850.html">demande aide pour création</a><a href="http://forum.finalclap.com/topic2418.html">icones soleil, camera, lumieres, etc... devenues minuscules</a><a href="http://forum.finalclap.com/topic15.html">Redimensionnement + convertion JPEG par lot</a><a href="http://forum.finalclap.com/topic2296.html">Comment gérer wiggle ?</a><a href="http://forum.finalclap.com/topic250.html">Tuto : Effet trait</a></td>
+</tr>
+</table><!-- .bottom_links -->
+
+
+<div id="social_hub" style="top:127px;">
+	<div class="liens">
+		<a href="http://www.facebook.com/finalclap" title="Suivez finalclap sur facebook !" target="_blank" id="facebook" style="right: -95px;">Facebook</a>
+		<a href="http://twitter.com/finalclap" title="Suivez finalclap sur twitter !" target="_blank" id="twitter" style="right: -95px;">Twitter</a>
+		<a href="http://feeds.feedburner.com/Finalclap" title="Abonnez vous au flux RSS" target="_blank" id="rss" style="right: -95px;">RSS</a>
+		<a href="http://feedburner.google.com/fb/a/mailverify?uri=Finalclap&amp;loc=fr_FR" onclick="window.open('http://feedburner.google.com/fb/a/mailverify?uri=Finalclap&amp;loc=fr_FR', 'popupwindow', 'scrollbars=yes,width=550,height=520');return false;" title="Restez informé par email (via feedburner)" target="_blank" id="email" style="right: -95px;">Email</a>
+	</div>
+	<span class="accroche" id="schub_accroche"></span>
+</div><!-- social_hub -->
+
+
+<div id="excel_forum_promo">
+	<div>
+		<img src="/style/images/logo-excel-engalere.png" alt="Forum Excel" />
+		<div class="pitch">Venez découvrir le nouveau <b>forum excel</b> question/réponse à la stackoverflow.com !</div>
+		<div class="arrow">►</div>
+		<a href="http://excel.engalere.com/">Forum Excel</a>
+	</div>
+</div>
+<script type="text/javascript">
+jQuery(document).ready(function($){
+	$('#excel_forum_promo a').mouseup(function(event){
+		$.post('/etc/ajax/stats-outlinks-tracker.php', {
+			urlFrom: document.location.href,
+			urlTo: this.href
+		});
+	});
+});
+</script>
+
+
+<!-- HIT-PARADE et HEBDOTOP -->
+<div align="center" style="display: none;">
+		<a href="http://www.hit-parade.com/hp.asp?site=a504529" target="_top" rel="nofollow"><img src="http://loga.hit-parade.com/logohp1.gif?site=a504529" alt="hit parade n'en a rien a foutre du W3C" title="Hit-Parade" width="77" height="15" border="0"/></a>
+	<img src="http://www.hebdotop.com/cgi-bin/vote.eur?id=168283" width="40" height="15" alt="Positionnement et Statistiques Gratuites" />
+		<a href="/noFacebook.html"><img src="/style/images/who_facebook.png" alt="Vincent Paré" /></a>
+</div>
+<script type="text/javascript" src="/script/advertisement.js?ad=criteo&pub=adsense"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($){
+	$.get('/etc/ajax/ganverrus.php', {status: typeof(window.adsIncluded) == 'undefined' ? 'false' : 'true'});
+});
+</script>
 </body>
 </html>
